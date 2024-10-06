@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}Lista de Eventos{% endblock %}
+
+{% block content %}
+    <h2 class="mb-4">Lista de Eventos</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th>Fecha</th>
+                <th>Creador</th>
+                <th>Asistentes</th>
+                <th>Acciones</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            {% for evento in eventos %}
+            <tr>
+                <td>{{ evento.nombre }}</td>
+                <td>{{ evento.descripcion }}</td>
+                <td>{{ evento.fecha }}</td>
+                <td>{{ evento.creador }}</td>
+                <td>{{ evento.asistentes.count }}</td> 
+                <td>
+                    <a href="{% url 'editar_evento' evento.id %}" class="btn btn-primary btn-sm">Editar</a>
+                    <a href="{% url 'eliminar_evento' evento.id %}" class="btn btn-danger btn-sm">Eliminar</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{% url 'crear_evento' %}" class="btn btn-success">Crear Evento</a>
+{% endblock %}

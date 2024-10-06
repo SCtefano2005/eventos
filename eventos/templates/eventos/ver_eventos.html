@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}Ver Eventos{% endblock %}
+
+{% block content %}
+<h2>Eventos Disponibles</h2>
+<ul class="list-group">
+    {% for evento in eventos %}
+    <li class="list-group-item">
+        <h5>{{ evento.nombre }}</h5>
+        <p>{{ evento.descripcion }}</p>
+        <p><strong>Fecha:</strong> {{ evento.fecha }}</p>
+        <form method="POST" action="{% url 'inscribirme_evento' evento.id %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-primary">Inscribirme</button>
+        </form>
+    </li>
+    {% empty %}
+    <li class="list-group-item">No hay eventos disponibles en este momento.</li>
+    {% endfor %}
+</ul>
+{% endblock %}

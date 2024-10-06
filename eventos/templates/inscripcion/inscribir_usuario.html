@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}Inscribir Usuario a Evento{% endblock %}
+
+{% block content %}
+    <h2>Inscribir Usuario a Evento</h2>
+    <form method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="usuario">Seleccionar Usuario:</label>
+            <select id="usuario" name="usuario" class="form-control">
+                {% for usuario in usuarios %}
+                <option value="{{ usuario.id }}">{{ usuario.nombre }} {{ usuario.apellido }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="evento">Seleccionar Evento:</label>
+            <select id="evento" name="evento" class="form-control">
+                {% for evento in eventos %}
+                <option value="{{ evento.id }}">{{ evento.nombre }} - {{ evento.fecha }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Inscribir Usuario</button>
+    </form>
+    <a href="{% url 'listar_eventos' %}" class="btn btn-secondary mt-3">Volver a la lista</a>
+{% endblock %}

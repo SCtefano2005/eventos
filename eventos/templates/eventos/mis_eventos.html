@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title %}Mis Eventos{% endblock %}
+
+{% block content %}
+<h2>Mis Eventos</h2>
+
+<h3>Eventos Creados</h3>
+<ul class="list-group">
+    {% for evento in eventos_creados %}
+    <li class="list-group-item">
+        <h5>{{ evento.nombre }}</h5>
+        <p>{{ evento.descripcion }}</p>
+        <p><strong>Fecha:</strong> {{ evento.fecha }}</p>
+        <p><strong>Participantes:</strong> {{ evento.numero_participantes }}</p> <!-- Mostrar la cantidad de participantes -->
+        <a href="{% url 'modificar_evento' evento.id %}" class="btn btn-primary">Editar</a>
+        <form action="{% url 'eliminar_evento' evento.id %}" method="post" style="display:inline;">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Eliminar</button>
+        </form>
+    </li>
+    {% empty %}
+    <li class="list-group-item">No has creado eventos.</li>
+    {% endfor %}
+</ul>
+
+<h3>Eventos a los que Estoy Inscrito</h3>
+<ul class="list-group">
+    {% for evento in eventos_inscritos %}
+    <li class="list-group-item">
+        <h5>{{ evento.nombre }}</h5>
+        <p>{{ evento.descripcion }}</p>
+        <p><strong>Fecha:</strong> {{ evento.fecha }}</p>
+        <p><strong>Participantes:</strong> {{ evento.numero_participantes }}</p> <!-- Mostrar la cantidad de participantes -->
+        <form action="{% url 'desinscribirme_evento' evento.id %}" method="post" style="display:inline;">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-warning">Anular inscripción</button>
+        </form>
+    </li>
+    {% empty %}
+    <li class="list-group-item">No estás inscrito en ningún evento.</li>
+    {% endfor %}
+</ul>
+{% endblock %}

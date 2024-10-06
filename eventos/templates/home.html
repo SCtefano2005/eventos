@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Página Principal{% endblock %}
+
+{% block content %}
+<h2>Bienvenido, {{ usuario_nombre }}!</h2>
+
+<p>Esta es tu página principal. Aquí puedes realizar las siguientes acciones:</p>
+
+<div class="btn-group" role="group" aria-label="Botones de acciones">
+    <a href="{% url 'create_evento' %}" class="btn btn-success">Crear Evento</a>
+    <a href="{% url 'ver_eventos' %}" class="btn btn-info">Ver Eventos</a>
+</div>
+{% endblock %}
+

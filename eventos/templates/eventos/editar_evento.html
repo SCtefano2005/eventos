@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}Editar Evento{% endblock %}
+
+{% block content %}
+    <h2>Editar Evento</h2>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}  <!-- Esto renderiza el formulario usando los widgets que hayas definido -->
+        
+        <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+    </form>
+    <a href="{% url 'listar_eventos' %}" class="btn btn-secondary mt-3">Volver a la lista</a>
+{% endblock %}

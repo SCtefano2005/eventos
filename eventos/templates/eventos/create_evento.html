@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}Crear Evento{% endblock %}
+
+{% block content %}
+<h2>Crear Evento</h2>
+
+<form method="POST">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label for="nombre" class="form-label">Nombre del Evento</label>
+        <input type="text" class="form-control" id="nombre" name="nombre" required>
+    </div>
+
+    <div class="mb-3">
+        <label for="descripcion" class="form-label">Descripción</label>
+        <textarea class="form-control" id="descripcion" name="descripcion" rows="3" required></textarea>
+    </div>
+
+    <div class="mb-3">
+        <label for="fecha" class="form-label">Fecha y Hora del Evento</label>
+        <input type="datetime-local" class="form-control" id="fecha" name="fecha" required>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Crear Evento</button>
+    <a href="{% url 'ver_eventos' %}" class="btn btn-secondary">Cancelar</a>
+</form>
+{% endblock %}
+

@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}Eventos de {{ usuario.nombre }}{% endblock %}
+
+{% block content %}
+    <h2>Eventos de {{ usuario.nombre }}</h2>
+
+    <h3>Eventos en los que está inscrito:</h3>
+    <ul>
+        {% if eventos_inscritos %}
+            {% for inscripcion in eventos_inscritos %}
+                <li>
+                    {{ inscripcion.evento.nombre }} - {{ inscripcion.evento.fecha }}
+                    <form method="POST" action="{% url 'desinscribir_usuario' inscripcion.evento.id inscripcion.usuario.id %}" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger btn-sm">Anular</button>
+                    </form>
+                </li>
+            {% endfor %}
+        {% else %}
+            <p>No está inscrito en ningún evento.</p>
+        {% endif %}
+    </ul>
+
+    <h3>Eventos que ha creado:</h3>
+    <ul>
+        {% if eventos_creados %}
+            {% for evento in eventos_creados %}
+                <li>{{ evento.nombre }} - {{ evento.fecha }}</li>
+            {% endfor %}
+        {% else %}
+            <p>No ha creado ningún evento.</p>
+        {% endif %}
+    </ul>
+
+    <a href="{% url 'listar_usuarios' %}" class="btn btn-secondary mt-3">Volver a la lista de eventos</a>
+{% endblock %}
+
